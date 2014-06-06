@@ -13,3 +13,5 @@ END IF;
 END; $$
 
 DELIMITER ;
+
+--call change_boss(2, 12);

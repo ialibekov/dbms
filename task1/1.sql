@@ -12,4 +12,5 @@ END; $$
 
 DELIMITER ;
 
+--call add_worker('Mike Vazovsky', 13);
 --select * from workers order by id desc limit 5;
