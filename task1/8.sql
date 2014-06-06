@@ -1,0 +1,22 @@
+set max_sp_recursion_depth=100;
+
+DROP TABLE IF EXISTS h_temp;
+CREATE TABLE h_temp (id INTEGER);
+
+DROP PROCEDURE IF exists print_rang;
+DELIMITER $$
+CREATE PROCEDURE print_rang (IN worker_id INTEGER)   
+BEGIN
+DECLARE temp INTEGER;
+INSERT into h_temp values(worker_id);
+SELECT boss FROM workers WHERE id = worker_id INTO temp;
+IF temp != -1 THEN
+	CALL hierarchy(temp);
+ELSE
+	SELECT COUNT(*) AS 'Rang' FROM workers WHERE id IN (SELECT * FROM h_temp);
+END IF;   
+END; $$
+
+DELIMITER ;
+
+--call print_rang(989);
